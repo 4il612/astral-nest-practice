@@ -3,17 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CardsModule } from './cards/cards.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'test',
-      entities: [],
-      synchronize: true,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot({
+    type: 'sqlite',
+    database: ':memory:',
+    entities: ['dist/**/*.entity{.ts,.js}'],
+    synchronize: true,
+  }), CardsModule],
 })
 export class AppModule {}
