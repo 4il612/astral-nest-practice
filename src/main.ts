@@ -12,7 +12,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('cards', app, document);
-
+  app.enableCors();
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
