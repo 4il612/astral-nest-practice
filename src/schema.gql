@@ -12,3 +12,13 @@ type Card {
 type Query {
   cards: [Card!]!
 }
+
+type Mutation {
+  createCard(createCardInput: CreateCardInput!): Card!
+}
+
+input CreateCardInput {
+  url: String!
+  alt: String!
+  date: String!
+}

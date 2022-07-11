@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Card } from './card.entity';
+import { CreateCardInput } from './dto/create-card.input';
 
 @Injectable()
 export class CardsService {
-    async findAll(): Promise<Card[]>{
-        const card = new Card()
-        card.id = 1;
-        card.url = "https://avatars.mds.yandex.net/i?id=0b4b4d998e608eb3c7265745ce419284-3548415-images-thumbs&n=13";
-        card.alt = "рыба";
-        card.date = "11 октября 2020 года";
+    constructor(@InjectRepository(Card) private cardsRepository: Repository<Card>){}
 
-        return [card];
+    createCard(createCardInput: CreateCardInput): Promise<Card>{
+        const newCard = this.cardsRepository.create(createCardInput);
+        return this.cardsRepository.save(newCard);
+    }
+
+    async findAll(): Promise<Card[]>{
+        return this.cardsRepository.find();
     }
 }
