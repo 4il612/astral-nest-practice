@@ -16,4 +16,9 @@ export class CardsService {
     async findAll(): Promise<Card[]>{
         return this.cardsRepository.find();
     }
+
+    findOne(id: number): Promise<Card>{
+        return this.cardsRepository.findOneOrFail({where: {id: id}});
+    }
+
 }

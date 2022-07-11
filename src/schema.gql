@@ -10,6 +10,7 @@ type Card {
 }
 
 type Query {
+  getCard(id: Int!): Card!
   cards: [Card!]!
 }
 
