@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { LessThanOrEqual, Repository } from 'typeorm';
 import { Card } from './card.entity';
 import { CreateCardInput } from './dto/create-card.input';
 
@@ -17,8 +17,12 @@ export class CardsService {
         return this.cardsRepository.find();
     }
 
-    findOne(id: number): Promise<Card>{
-        return this.cardsRepository.findOneOrFail({where: {id: id}});
+    findSlice(limit: number): Promise<Card[]>{
+        return this.cardsRepository.find({
+            where:{
+                id: LessThanOrEqual(limit)
+            }
+        });
     }
 
 }

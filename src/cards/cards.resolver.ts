@@ -7,9 +7,9 @@ import { CreateCardInput } from './dto/create-card.input';
 export class CardsResolver {
     constructor(private cardsService: CardsService){}
 
-    @Query(returns => Card)
-    getCard(@Args('id', {type: () => Int}) id: number): Promise<Card>{
-        return this.cardsService.findOne(id);
+    @Query(returns => [Card])
+    getSlice(@Args('limit', {type: () => Int}) limit: number): Promise<Card[]>{
+        return this.cardsService.findSlice(limit);
     }
 
     @Query(returns => [Card])

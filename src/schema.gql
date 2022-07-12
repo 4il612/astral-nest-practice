@@ -10,7 +10,7 @@ type Card {
 }
 
 type Query {
-  getCard(id: Int!): Card!
+  getSlice(limit: Int!): [Card!]!
   cards: [Card!]!
 }
 
